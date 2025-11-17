@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Green Campus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body style="background-color:#d0d4d9 ;">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <div class="p-3 mb-2 bg-dark-subtle text-success">
+        <br>
+        <div class="position-relative">
+            <div class="position-absolute top-0 start-50 translate-middle">
+                <h1 class="display-5">
+                    <b>Green Campus</b>
+                    <small class="text-body-secondary">Lake Forest College 2025</small>
+                </h1>
+            </div>
+        </div>
+        <div class="position-absolute top-0 start-0">
+            <img src="LFC_logo_FullColor_WT.png" alt="Logo" width="100" height="110"
+                class="d-inline-block align-text-top">
+        </div>
+
+        <br><br><br><br>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-light">
+                <h4 class="mb-0">Hall Overview</h4>
+            </div>
+
+            <div class="p-3 mb-2 bg-light-subtle text-info-emphasis">
+                <table class="table table-striped-columns">
+                    <thead>
+                        <tr>
+                            <th scope="col"><a
+                                    class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
+                                    href="BrownHall.html" target="_blank">
+                                    <center>
+                                        <h2>Brown</h2>
+                                    </center>
+                                </a>
+                                <a class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
+                                    href="BrownHall.php" target="_blank">
+                                    <center>
+                                        <h2>Brown php</h2>
+                                    </center>
+                                </a>
+                            </th>
+                            <th scope="col"><a
+                                    class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
+                                    href="#" target="_blank">
+                                    <center>
+                                        <h2>Carnegie</h2>
+                                    </center>
+                                </a></th>
+                            <th scope="col"><a
+                                    class="link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"
+                                    href="#" target="_blank">
+                                    <center>
+                                        <h2>Lillard</h2>
+                                    </center>
+                                </a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <center><img src="brownHall.jpg" class="img-fluid" alt="Brown Hall"></center>
+                            </td>
+                            <td>
+                                <center><img src="carnegie.jpg" class="img-fluid" alt="Carnegie Hall">
+                                </center>
+                            </td>
+                            <td>
+                                <center><img src="lillard.jpg" class="img-fluid" alt="Lillard Science Center">
+                                </center>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+    
+    <div class="p-5">
+        <h3 class="text-info-emphasis">Chatbot</h3>
+        <form id="chatbox" class="d-flex" role="search">
+            <input id="userInput" class="form-control me-2" style="width: 70%;" placeholder="Ask a question..."/>
+            <button class="btn btn-outline-success" onclick="sendQuestion()">Send</button>
+          </form>
+    </div>
+    <script>
+
+        function sendQuestion() {
+
+            let question = document.getElementById('userInput').value;
+
+            if (!question) return;
+
+
+
+            let chatbox = document.getElementById('chatbox');
+
+            chatbox.innerHTML += "<p><b>You:</b> " + question + "</p>";
+
+
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "chat.php", true);
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+
+                if (xhr.readyState == 4 && xhr.status == 200) {
+
+                    chatbox.innerHTML += "<p><b>Chatbot:</b> " + xhr.responseText + "</p>";
+
+                    chatbox.scrollTop = chatbox.scrollHeight;
+
+                }
+
+            };
+
+            xhr.send("question=" + encodeURIComponent(question));
+
+            document.getElementById('userInput').value = '';
+
+        }
+
+    </script>
+
+</body>
+
+</html>
